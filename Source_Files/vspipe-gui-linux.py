@@ -1284,7 +1284,8 @@ class LigandPrepModule:
         os.system(f'python2.7 /usr/local/bin/atom_deletion.py ligands/sdf/properties_ligands.sdf ligands/sdf/')
 
         # Minimizing ligands/sdf/del_atoms_properties_ligands.sdf using openBabel
-        os.system(f'obabel ligands/sdf/del_atoms_properties_ligands.sdf -O ligands/pdb/ligand.pdb --gen3d -m --conformer --nconf 50 --score energy')
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+        os.system(f'obabel ligands/sdf/del_atoms_properties_ligands.sdf -O ligands/pdb/ligand.pdb --gen3d -m --conformer --nconf 50 --score energy -p 7.4')
         
         # Accessing the library path of /ligands/pdb/
         self.library_path= os.getcwd() + "/ligands/pdb/"
