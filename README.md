@@ -1,5 +1,4 @@
-# VSpipe-GUI  
-An Interactive Graphical User Interface for Virtual Screening and Hit Selection
+# VSpipe-GUI, an Interactive Graphical User Interface for Virtual Screening and Hit Selection
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-blue.svg)](https://creativecommons.org/licenses/by/4.0/)
 
