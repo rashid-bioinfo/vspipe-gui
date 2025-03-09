@@ -11,6 +11,32 @@ VSpipe-GUI is a cross-platform, open-source Python toolkit that brings a user-fr
 International Journal of Molecular Sciences, **25**, 2002.  
 [https://doi.org/10.3390/ijms25042002](https://doi.org/10.3390/ijms25042002)
 
+## Authors & Affiliations
+
+- **Rashid Hussain (R.H.)**  
+  School of Biological Sciences, Faculty of Biology Medicine and Health  
+  University of Manchester, Manchester Academic Health Science Centre  
+  Manchester M13 9PT, UK  
+  *Email:* rashid.bioinfo@gmail.com
+
+- **Andrew Scott Hackett (A.S.H.)**  
+  School of Biological Sciences, Faculty of Biology Medicine and Health  
+  University of Manchester, Manchester Academic Health Science Centre  
+  Manchester M13 9PT, UK  
+  *Email:* andrew.hackett-2@postgrad.manchester.ac.uk
+
+- **Sandra Álvarez-Carretero (S.Á.-C.)**  
+  Bristol Palaeobiology Group, School of Earth Sciences  
+  University of Bristol, Life Sciences Building, Tyndall Avenue  
+  Bristol BS8 1TH, UK  
+  *Email:* sandra.ac93@gmail.com or s.alvarez-carretero@bristol.ac.uk
+
+- **Lydia Tabernero (L.T.)**  
+  School of Biological Sciences, Faculty of Biology Medicine and Health  
+  University of Manchester, Manchester Academic Health Science Centre  
+  Manchester M13 9PT, UK  
+  *Email:* lydia.tabernero@manchester.ac.uk
+
 ## Installation Guide
 
 To get started with VSpipe-GUI, follow these installation steps:
