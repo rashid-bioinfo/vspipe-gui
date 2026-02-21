@@ -219,7 +219,6 @@ Additional libraries can be installed later if the GUI reports that something is
 Once all dependencies are in place, copy the helper scripts and minimised libraries:
 
 ```bash
-cd ~/0_vspipe
 
 # copy all VSpipe helper tools into /usr/local/bin
 sudo cp -r vspipe-tools_mac/* /usr/local/bin/
