@@ -59,26 +59,26 @@ These steps follow the layout used on the development machine, where everything 
 
 Create a working directory and place the following items inside it:
 
-- `vspipe-gui-linux_nov2025.py`  
-  Main VSpipe-GUI Python script for Linux.
+- `vspipe-gui-linux_v002.py`  
+  Main VSpipe-GUI Python script for Linux (v002).
 
-- `vspipe_tools_mac/`  
+- `vspipe-tools_mac/`  
   Folder containing the helper scripts used by VSpipe-GUI  
   (used on Linux as well despite the folder name).
 
 - `sdf_add_code.py`  
-  Helper script for SDF handling.
+  Helper script for SDF handling (if not already in `vspipe-tools_mac`).
 
 - `minimised_libs/`  
   Folder with pre minimised compound libraries  
-  (unzipped from `vspipe-libraries.zip`).
+  (unzipped from `vspipe-libraries.zip` or distributed separately).
 
 Typical layout:
 
 ```text
 ~/0_vspipe/
-    vspipe-gui-linux_nov2025.py
-    vspipe_tools_mac/
+    vspipe-gui-linux_v002.py
+    vspipe-tools_mac/
     sdf_add_code.py
     minimised_libs/
 ```
@@ -91,9 +91,9 @@ From inside your working directory:
 cd ~/0_vspipe
 
 # copy all VSpipe helper tools into /usr/local/bin
-sudo cp -r vspipe_tools_mac/* /usr/local/bin/
+sudo cp -r vspipe-tools_mac/* /usr/local/bin/
 
-# copy the SDF helper script
+# copy the SDF helper script if needed
 sudo cp sdf_add_code.py /usr/local/bin/
 
 # copy pre minimised libraries into /usr/local/lib
@@ -125,9 +125,9 @@ The following components are crucial for a working installation.
 
   1. Install Python 2.7 from source and ensure `/usr/local/bin/python2.7` exists.
 
-  2. Port the legacy helper scripts to Python 3 and update the calls inside `vspipe-gui-linux_nov2025.py` from `python2.7` to `python3`.
+  2. Port the legacy helper scripts to Python 3 and update the calls inside `vspipe-gui-linux_v002.py` from `python2.7` to `python3`.
 
-  The pipeline currently assumes that `python2.7` is available.
+  The current pipeline assumes that `python2.7` is available unless you have ported the tools.
 
 #### 1.3.2. MGLTools and AutoDockTools scripts
 
@@ -223,14 +223,14 @@ From your working directory:
 
 ```bash
 cd ~/0_vspipe
-python3 vspipe-gui-linux_nov2025.py
+python3 vspipe-gui-linux_v002.py
 ```
 
 If all dependencies and tools are correctly installed, the VSpipe-GUI window should open and you can configure your project folders, receptor, libraries, and docking settings from the interface.
 
 ---
 
-## 2. macOS (bundled app)
+## 2. macOS (bundled app, v002)
 
 For macOS users a bundled application is provided together with the same tool scripts and libraries.
 
@@ -241,32 +241,28 @@ git clone https://github.com/rashid-bioinfo/vspipe-gui.git
 cd vspipe-gui
 ```
 
-Inside the repository you will find:
+Inside the repository (master branch) you will find:
 
-- `Executables/Mac/vspipe-gui-mac-app`  
-  Standalone VSpipe-GUI macOS application.
+- `vspipe-gui-mac_v002.py`  
+  macOS launcher script for VSpipe-GUI.
 
-- `Executables/Mac/vspipe-tools/`  
+- `vspipe-tools_mac/`  
   Folder containing the helper scripts used by the macOS app.
 
-- `vspipe-libraries.zip`  
-  Archive containing the pre minimised compound libraries.
+- `minimised_libs/`  
+  Folder containing the pre minimised compound libraries.
 
 ### 2.2. Copy helper tools and libraries
 
-Unzip the libraries and copy tools and libraries to standard locations:
+Unzip the libraries if they were provided as an archive, then copy tools and libraries to standard locations:
 
 ```bash
-# from the repository root
-unzip vspipe-libraries.zip
-
 # copy VSpipe helper tools
-cd Executables/Mac/vspipe-tools
-sudo cp * /usr/local/bin/
+cd /path/to/vspipe-gui
+sudo cp -r vspipe-tools_mac/* /usr/local/bin/
 sudo chmod 755 /usr/local/bin/*
 
 # copy minimised libraries
-cd ../../..
 sudo cp -r minimised_libs /usr/local/lib/
 sudo chmod -R 755 /usr/local/lib/minimised_libs
 ```
@@ -324,17 +320,24 @@ You need the same core dependencies as on Linux:
 
 ### 2.4. Launching VSpipe-GUI on macOS
 
-You can start the macOS app in two ways:
+From Terminal:
 
-- Double click `Executables/Mac/vspipe-gui-mac-app` in Finder, or
-- Run from Terminal:
-
-  ```bash
-  cd /path/to/vspipe-gui/Executables/Mac
-  ./vspipe-gui-mac-app
-  ```
+```bash
+cd /path/to/vspipe-gui
+python3 vspipe-gui-mac_v002.py
+```
 
 If the required tools are installed and on the path, the GUI should open and behave identically to the Linux version.
+
+---
+
+## 3. Legacy versions and additional materials
+
+Older versions of VSpipe-GUI (including the original `Installation_Guide` and `Source_Files` folders) are preserved in the `legacy-old-version` branch of this repository. If you need legacy executables, example projects, or the original CLI pipeline, switch to that branch on GitHub or via:
+
+```bash
+git checkout legacy-old-version
+```
 
 ---
 
