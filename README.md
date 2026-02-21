@@ -73,6 +73,9 @@ Create a working directory and place the following items inside it:
   Folder with pre minimised compound libraries  
   (unzipped from `vspipe-libraries.zip` or distributed separately).
 
+- `requirements.sh`  
+  Convenience script for installing Python dependencies.
+
 Typical layout:
 
 ```text
@@ -81,36 +84,14 @@ Typical layout:
     vspipe-tools_mac/
     sdf_add_code.py
     minimised_libs/
+    requirements.sh
 ```
 
-### 1.2. Step 1 – copy helper scripts and libraries
+### 1.2. Step 1 – install required system and Python dependencies
 
-From inside your working directory:
+Install all dependencies first, then copy the VSpipe tools and libraries.
 
-```bash
-cd ~/0_vspipe
-
-# copy all VSpipe helper tools into /usr/local/bin
-sudo cp -r vspipe-tools_mac/* /usr/local/bin/
-
-# copy the SDF helper script if needed
-sudo cp sdf_add_code.py /usr/local/bin/
-
-# copy pre minimised libraries into /usr/local/lib
-sudo cp -r minimised_libs /usr/local/lib/
-
-# make sure everything is executable and readable
-sudo chmod 755 /usr/local/bin/*.py
-sudo chmod -R 755 /usr/local/lib/minimised_libs
-```
-
-After this step, all VSpipe helper scripts should be available system wide and the minimised libraries accessible to the GUI.
-
-### 1.3. Step 2 – install required system dependencies
-
-The following components are crucial for a working installation.
-
-#### 1.3.1. Python
+#### 1.2.1. Python
 
 - System Python 3 (for the GUI itself):
 
@@ -129,7 +110,7 @@ The following components are crucial for a working installation.
 
   The current pipeline assumes that `python2.7` is available unless you have ported the tools.
 
-#### 1.3.2. MGLTools and AutoDockTools scripts
+#### 1.2.2. MGLTools and AutoDockTools scripts
 
 VSpipe-GUI uses AutoDockTools scripts for receptor and ligand preparation:
 
@@ -149,7 +130,7 @@ Steps:
    /opt/mgltools_x.y.z/bin/pythonsh
    ```
 
-3. Open each of the above scripts that you copied into `/usr/local/bin` and update the first line (shebang) so that it points to your `pythonsh` path. For example:
+3. After copying these scripts into `/usr/local/bin` (see Step 1.3), open each one and update the first line (shebang) so that it points to your `pythonsh` path. For example:
 
    ```python
    #! /opt/mgltools_x.y.z/bin/pythonsh
@@ -157,7 +138,7 @@ Steps:
 
 This allows the AutoDockTools preparation scripts to run correctly from within the GUI.
 
-#### 1.3.3. R and Rscript
+#### 1.2.3. R and Rscript
 
 VSpipe-GUI uses an R script for filtering and scoring:
 
@@ -173,7 +154,7 @@ Rscript --version
 
 Any additional R packages required by `filtering.R` should be installed from within R using `install.packages()`.
 
-#### 1.3.4. Open Babel
+#### 1.2.4. Open Babel
 
 Open Babel is used for ligand preparation and format conversion:
 
@@ -187,7 +168,7 @@ Confirm that `obabel` is on your path:
 obabel -V
 ```
 
-#### 1.3.5. Docking engines
+#### 1.2.5. Docking engines
 
 VSpipe-GUI uses both AutoDock Vina and AutoDock 4.
 
@@ -207,9 +188,25 @@ VSpipe-GUI uses both AutoDock Vina and AutoDock 4.
   sudo chmod 755 /usr/local/bin/autodock4 /usr/local/bin/autogrid4
   ```
 
-### 1.4. Step 3 – install Python libraries
+#### 1.2.6. Python libraries
 
-Inside a Python 3 environment (system Python or a virtual environment), install the libraries used by the GUI:
+You can install the Python dependencies either via the provided `requirements.sh` script or manually.
+
+**Option A – using `requirements.sh` (recommended)**
+
+From inside the repository:
+
+```bash
+cd /path/to/vspipe-gui   # folder containing requirements.sh
+chmod +x requirements.sh
+./requirements.sh
+```
+
+This script will install the Python packages required by VSpipe-GUI (and any additional tools specified in the script). You can open the file in a text editor to see exactly what it installs.
+
+**Option B – manual installation**
+
+If you prefer to install the packages manually or in a virtual environment:
 
 ```bash
 python3 -m pip install     numpy     pandas     scikit-spatial     openpyxl     biopython     pdb-tools
@@ -217,7 +214,30 @@ python3 -m pip install     numpy     pandas     scikit-spatial     openpyxl     
 
 Additional libraries can be installed later if the GUI reports that something is missing.
 
-### 1.5. Launching VSpipe-GUI on Linux
+### 1.3. Step 2 – copy helper scripts and libraries
+
+Once all dependencies are in place, copy the helper scripts and minimised libraries:
+
+```bash
+cd ~/0_vspipe
+
+# copy all VSpipe helper tools into /usr/local/bin
+sudo cp -r vspipe-tools_mac/* /usr/local/bin/
+
+# copy the SDF helper script if needed
+sudo cp sdf_add_code.py /usr/local/bin/
+
+# copy pre minimised libraries into /usr/local/lib
+sudo cp -r minimised_libs /usr/local/lib/
+
+# make sure everything is executable and readable
+sudo chmod 755 /usr/local/bin/*.py
+sudo chmod -R 755 /usr/local/lib/minimised_libs
+```
+
+After this step, all VSpipe helper scripts should be available system wide and the minimised libraries accessible to the GUI. At this point you can also adjust the shebang lines in the AutoDockTools scripts (see Section 1.2.2).
+
+### 1.4. Launching VSpipe-GUI on Linux
 
 From your working directory:
 
@@ -252,22 +272,10 @@ Inside the repository (master branch) you will find:
 - `minimised_libs/`  
   Folder containing the pre minimised compound libraries.
 
-### 2.2. Copy helper tools and libraries
+- `requirements.sh`  
+  Script for installing Python dependencies.
 
-Unzip the libraries if they were provided as an archive, then copy tools and libraries to standard locations:
-
-```bash
-# copy VSpipe helper tools
-cd /path/to/vspipe-gui
-sudo cp -r vspipe-tools_mac/* /usr/local/bin/
-sudo chmod 755 /usr/local/bin/*
-
-# copy minimised libraries
-sudo cp -r minimised_libs /usr/local/lib/
-sudo chmod -R 755 /usr/local/lib/minimised_libs
-```
-
-### 2.3. Install dependencies on macOS
+### 2.2. Step 1 – install dependencies on macOS
 
 You need the same core dependencies as on Linux:
 
@@ -281,15 +289,7 @@ You need the same core dependencies as on Linux:
 
 2. **MGLTools**
 
-   Install MGLTools, then locate the `pythonsh` executable. Update the shebang line in the following scripts in `/usr/local/bin`:
-
-   - `prepare_receptor4.py`
-   - `prepare_ligand4.py`
-   - `prepare_gpf4.py`
-   - `prepare_dpf4.py`
-   - `summarize_results4.py`
-
-   so that the first line points to your `pythonsh` path.
+   Install MGLTools, then locate the `pythonsh` executable.
 
 3. **R and Rscript**
 
@@ -314,9 +314,43 @@ You need the same core dependencies as on Linux:
 
 6. **Python libraries**
 
+   As on Linux, you can use the `requirements.sh` script:
+
+   ```bash
+   cd /path/to/vspipe-gui
+   chmod +x requirements.sh
+   ./requirements.sh
+   ```
+
+   or install them manually with `pip`:
+
    ```bash
    python3 -m pip install        numpy        pandas        scikit-spatial        openpyxl        biopython        pdb-tools
    ```
+
+### 2.3. Step 2 – copy helper tools and libraries on macOS
+
+Unzip the libraries if they were provided as an archive, then copy tools and libraries to standard locations:
+
+```bash
+cd /path/to/vspipe-gui
+
+# copy VSpipe helper tools
+sudo cp -r vspipe-tools_mac/* /usr/local/bin/
+sudo chmod 755 /usr/local/bin/*
+
+# copy minimised libraries
+sudo cp -r minimised_libs /usr/local/lib/
+sudo chmod -R 755 /usr/local/lib/minimised_libs
+```
+
+After copying, update the shebang line in the following scripts in `/usr/local/bin` so that the first line points to the correct `pythonsh` from your MGLTools installation:
+
+- `prepare_receptor4.py`
+- `prepare_ligand4.py`
+- `prepare_gpf4.py`
+- `prepare_dpf4.py`
+- `summarize_results4.py`
 
 ### 2.4. Launching VSpipe-GUI on macOS
 
