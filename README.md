@@ -67,7 +67,7 @@ VSpipe-GUI is a cross-platform, open-source Python application that provides an 
 | **ATLAS-Compatible Output** | Exports results in ATLAS-ready format |
 | **Batch Screening** | Supports screening of large compound libraries |
 | **Bundled Libraries** | Ships with 10 pre-minimised fragment and natural product libraries |
-| **Cross-Platform** | Runs on Linux and macOS |
+| **Cross-Platform** | Runs on Linux, macOS and Windows|
 
 ---
 
